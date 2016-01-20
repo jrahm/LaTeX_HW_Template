@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\usepackage{datetime}
+\usepackage{lipsum}
+
+\def\primarycolor{0.6,0,0.0}
+\def\secondarycolor{0.4,0.4,0.0}
+
+\def\theauthor{Josh Rahm}
+\def\thetitle{Homework \#0}
+\def\thedate{\today}
+\def\theclass{CSCI 1337: How to Boss}
+\def\theprofessor{Prof. Satoshi Nakamoto}
+\newdate{theduedate}{31}{02}{2048}
+
+\input{homework.tex}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+
+    \prdescription{\lipsum[66]}
+    \sep
+
+    This is a problem. \lipsum[66]
+
+    \begin{subproblem}
+        This is a sub problem. \lipsum[66]
+
+        \begin{ipart}
+            This is an ith part of the answer
+        \end{ipart}
+
+        \begin{ipart}
+            \lipsum[66]
+        \end{ipart}
+        \sep
+
+        \lipsum[66]
+
+    \end{subproblem}
+
+    \begin{subproblem}
+        \lipsum[11]
+
+        \[
+        \sum_n {n^3 - 3}
+        \]
+
+    \end{subproblem}
+
+    \lipsum[77]
+
+\end{problem}
+
+\begin{problem}
+    \begin{subproblem}
+        \lipsum[64]
+
+        \[
+                C(n) = \begin{cases}
+                    0, & n = 1 \\
+                    C(3n + 1), & odd(n) \\
+                    C\left(\frac{n}{2}\right), & otherwise
+                \end{cases}
+        \]
+
+        \begin{shift}
+            \textbf{Claim:} $\forall n, C(n)\ terminates\land C(n) = 0$
+
+            \textbf{Proof:} \lipsum[75]
+
+            \begin{ipart}
+                \lipsum[75]
+            \end{ipart}
+            \begin{ipart}
+                \lipsum[75]
+            \end{ipart}
+            \begin{ipart}
+                \lipsum[75]
+            \end{ipart}
+            \begin{ipart}
+                \lipsum[75]
+            \end{ipart}
+        \end{shift}
+    \end{subproblem}
+
+    \begin{subproblem}
+
+    \begin{minted}{haskell}
+        collatz 1 = 0
+        collatz n | n `mod` 2 == 0 = 1 + collatz (n `div` 2)
+                  | otherwise = 1 + collatz (n * 3 + 1)
+    \end{minted}
+
+    \end{subproblem}
+\end{problem}
+
+\end{document}

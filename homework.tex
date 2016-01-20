@@ -1,0 +1,160 @@
+\usepackage{xhfill}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage[margin=1in]{geometry}
+\usepackage{varwidth}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{calc}
+\usepackage{lastpage}
+\usepackage{minted}
+
+
+\definecolor{darkblue}{rgb}{\primarycolor}
+\definecolor{darkorange}{rgb}{\secondarycolor}
+
+\newdateformat{dueon}{%
+Due On:\
+\shortmonthname[\THEMONTH]. \THEDAY, \THEYEAR}
+
+\newdateformat{simpledateformat}{
+\shortmonthname[\THEMONTH]. \THEDAY, \THEYEAR}
+
+\newcommand{\clincher}{\vspace{0.5cm}---\vspace{0.5cm}}
+
+
+\fancypagestyle{footonly}{%
+    \fancyhf{}
+    \renewcommand{\headrule}{}
+    \fancyfoot[R]{\thepage\ of\ \pageref{LastPage}}
+    \renewcommand{\footrulewidth}{1pt}% 2pt header rule
+    \renewcommand{\footrule}{\hbox to\headwidth{%
+        \color{darkblue}\leaders\hrule height \headrulewidth\hfill}}
+}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    % \fancyhead[R]{\textcolor{blue}{\hrule}}
+    \fancyhead[R]{\textbf{\theauthor} \\ \dueon\textbf{\displaydate{theduedate}}}
+    \fancyhead[L]{\textbf{\theclass} \\ \textbf{\theprofessor}}
+    \fancyhead[C]{\thetitle}
+    \renewcommand{\headrulewidth}{1pt}% 2pt header rule
+    \renewcommand{\headrule}{\hbox to\headwidth{%
+        \color{darkblue}\leaders\hrule height \headrulewidth\hfill}}
+
+    % \fancyhead[R]{\textcolor{blue}{\hrule}}
+        \fancyfoot[R]{\thepage\ of\ \pageref{LastPage}}
+    \fancyfoot[L]{\textbf{\today}}
+    \renewcommand{\footrulewidth}{1pt}% 2pt header rule
+    \renewcommand{\footrule}{\hbox to\headwidth{%
+        \color{darkblue}\leaders\hrule height \headrulewidth\hfill}}
+}
+
+\newmdenv[topline=false,bottomline=false,linewidth=1pt]{border}
+\newmdenv[topline=false,rightline=false,leftline=false,linewidth=1pt,linecolor=darkblue]{bottom}
+\newmdenv[bottomline=false,rightline=false,leftline=false,linewidth=1pt,linecolor=black]{topline}
+
+\newenvironment{code}[1]
+{\begin{minipage}{0.8\textwidth}
+\begin{mdframed}[frametitle={#1}]}
+{\end{mdframed}
+\end{minipage}
+}
+
+\newcommand{\prdescription}[1]{%
+
+    \begin{center}
+        \begin{minipage}[t]{35pt}
+            \textcolor{darkorange}{\textbf{\emph{descr.\ }}}
+            \hspace{3pt}
+        \end{minipage}
+        \begin{minipage}[t]{0.67\textwidth}
+                \footnotesize\textcolor{darkorange}{#1}
+        \end{minipage}
+    \end{center}
+
+}
+
+\newlength{\gnat}
+\settowidth{\gnat}{\textbf{normalsize}}
+
+\newcounter{problem}
+\setcounter{problem}{1}
+\newenvironment{problem}
+{
+ \setcounter{subproblem}{1}
+ \setcounter{ipart}{1}
+    \vspace{0.5cm}
+    \def\problem{\textbf{Problem \arabic{problem}.}}
+    \problem
+    \vspace{-0.25\baselineskip}
+    \begin{adjustwidth}{\widthof{\widthof{\problem}+4em}}{}
+        \begin{topline}
+        \end{topline}
+    \end{adjustwidth}
+    \begin{center}
+        \begin{adjustwidth}{4em}{4em}
+        \addtocounter{problem}{1}
+    }
+{\end{adjustwidth}
+ \end{center}
+}
+
+\newcounter{subproblem}
+\setcounter{subproblem}{1}
+\newcounter{ipart}
+\setcounter{ipart}{1}
+
+\newenvironment{subproblem}
+{%
+ \setcounter{ipart}{1}
+\vspace{0.5cm}
+    \begin{minipage}[t]{2em}
+        \emph{\textbf{\alph{subproblem}.}}
+    \end{minipage}
+    \begin{adjustwidth}{2em}{0em}
+    \vspace{-\baselineskip}
+    \addtocounter{subproblem}{1}
+}
+{
+\end{adjustwidth}
+}
+
+\newenvironment{ipart}
+{%
+\vspace{0.5cm}
+    \begin{minipage}[t]{2em}
+        \emph{\textbf{\roman{ipart}.}}
+    \end{minipage}
+    \begin{adjustwidth}{2em}{2em}
+    \vspace{-\baselineskip}
+    \addtocounter{ipart}{1}
+}
+{
+\end{adjustwidth}
+}
+
+\newenvironment{shift}
+{\begin{adjustwidth}{2em}{2em}}
+{\end{adjustwidth}}
+
+\renewcommand{\maketitle}{%
+\thispagestyle{footonly}
+    \begin{center}
+
+        \begin{tabular}{p{0.3\textwidth} p{0.3\textwidth} p{0.3\textwidth}}
+            \theclass & \centering\textbf{\Large\thetitle} & \hfill\theauthor \\
+            \theprofessor & \centering\simpledateformat\today & \hfill\dueon\displaydate{theduedate}
+        \end{tabular}
+    \vspace{0.5cm}
+\end{center}
+}
+
+\newcommand\hackspace{\vspace{0.5cm}}
+
+\newcommand\subprdescr[1]{{\footnotesize\textcolor{darkorange}{#1}}}
+
+\pagestyle{plain}
+\simpledateformat
+\newcommand\sep{\vspace{0.5cm}}
